@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="__APP_TITLE__">
+<meta name="theme-color" content="#0B0B0B">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:0}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head><body>
+<title>__TITLE__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+/* Concierge Operadora · app del viajero (plantilla). Layout: una columna tipo app (máx. 720px) con portada fotográfica, selector de días y barra inferior de 5 secciones */
+:root{
+  --bg:#F7F6F4; --surface:#FFFFFF; --sunk:#EFEDEA; --ink:#141414; --soft:#6B6762; --line:#E2DFDA;
+  --navy:#0B0B0B; --navy-ink:#FFFFFF; --gold:#7A6646; --gold-soft:#D8C9AA; --ok:#2F6B4B; --warn:#9A6224;
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Jost","Avenir Next","Helvetica Neue",Arial,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A0A0A; --surface:#151515; --sunk:#1C1C1C; --ink:#EEEBE6; --soft:#A39E97; --line:#2B2B2B;
+  --navy:#1E1E1E; --navy-ink:#FFFFFF; --gold:#D3C19C; --gold-soft:#D8C9AA; --ok:#7CC39A; --warn:#E3A35E; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A0A0A; --surface:#151515; --sunk:#1C1C1C; --ink:#EEEBE6; --soft:#A39E97; --line:#2B2B2B;
+  --navy:#1E1E1E; --navy-ink:#FFFFFF; --gold:#D3C19C; --gold-soft:#D8C9AA; --ok:#7CC39A; --warn:#E3A35E; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+html{font-feature-settings:"lnum" 1}
+body{color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.app{max-width:720px;margin:0 auto;padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+.wrap{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.15;text-wrap:balance;margin:0}
+.kicker{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.muted{color:var(--soft)}
+.tab-view[hidden]{display:none!important}
+
+/* Portada */
+.hero{position:relative;color:#fff;background:#0B0B0B center/cover no-repeat;padding-block:22px 26px}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,.15) 30%,rgba(0,0,0,.55) 55%,rgba(0,0,0,.92) 100%)}
+.hero>*{position:relative;z-index:1}
+.hero .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{height:38px;width:auto;color:#fff;display:block}
+.logo svg{height:38px;width:auto;display:block;overflow:visible}
+.code{font-size:11px;letter-spacing:.18em;opacity:.85;font-variant-numeric:tabular-nums}
+.hero .main{margin-top:96px}
+.hero .hi{text-shadow:0 1px 8px rgba(0,0,0,.5);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+.hero h1{font-size:clamp(36px,9vw,54px);margin:6px 0 4px}
+.hero h1 em{font-style:italic;color:var(--gold-soft)}
+.hero p{margin:0;max-width:34em;opacity:.92;font-weight:300}
+.hero .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:5px 12px;font-size:13px;backdrop-filter:blur(6px);background:rgba(255,255,255,.08)}
+.pill.gold{border-color:var(--gold-soft);color:var(--gold-soft)}
+
+/* Relojes */
+.clocks{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);background:var(--surface)}
+.clock{padding:12px 18px;display:flex;flex-direction:column}
+.clock+.clock{border-left:1px solid var(--line)}
+.clock span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--soft)}
+.clock b{font-family:var(--display);font-weight:400;font-size:26px;font-variant-numeric:tabular-nums;line-height:1.2}
+.clock small{font-size:12.5px;color:var(--soft)}
+
+/* Próximo */
+.next{margin-top:18px;background:var(--navy);color:var(--navy-ink);border-radius:var(--r);padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center}
+.next .ic{grid-row:span 2;width:42px;height:42px;border-radius:50%;border:1px solid var(--gold-soft);display:grid;place-items:center;color:var(--gold-soft)}
+.next .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+.next b{font-family:var(--display);font-weight:400;font-size:18px;line-height:1.25}
+
+/* Días */
+.days{display:flex;gap:8px;overflow-x:auto;padding:16px 0 6px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.day-chip{flex:0 0 auto;scroll-snap-align:start;min-width:62px;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 10px;text-align:center;cursor:pointer;line-height:1.2}
+.day-chip .w{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.day-chip .n{display:block;font-family:var(--display);font-size:22px;font-variant-numeric:tabular-nums}
+.day-chip .c{font-size:10.5px;color:var(--soft);white-space:nowrap}
+.day-chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+:root[data-theme="dark"] .day-chip[aria-pressed="true"]{border-color:var(--gold-soft)}
+.day-chip[aria-pressed="true"] .w,.day-chip[aria-pressed="true"] .c{color:var(--gold-soft)}
+.day-chip.today{border-color:var(--gold)}
+
+.band{margin-top:14px;border-radius:var(--r);overflow:hidden;position:relative;min-height:150px;display:flex;align-items:flex-end;color:#fff;background:#0B0B0B center/cover no-repeat}
+.band::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.8))}
+.band.plain{background-image:radial-gradient(120% 140% at 100% 0%,#2B2B2B 0%,#0B0B0B 55%,#000000 100%)}
+.band .in{position:relative;padding:16px 18px;width:100%}
+.band .k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft)}
+.band h2{font-size:26px;margin-top:4px}
+.band .meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:13.5px;opacity:.92}
+
+/* Línea de tiempo */
+.timeline{margin-top:6px}
+.ev{display:grid;grid-template-columns:64px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.ev:last-child{border-bottom:0}
+.ev .t{text-align:right;font-variant-numeric:tabular-nums}
+.ev .t b{display:block;font-family:var(--display);font-weight:400;font-size:21px;line-height:1.1}
+.ev .t small{display:block;font-size:11.5px;color:var(--soft);margin-top:3px;line-height:1.25}
+.ev .body{min-width:0}
+.ev .type{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.ev .type svg{width:15px;height:15px}
+.ev h3{font-size:18.5px;margin:4px 0 4px;font-weight:400}
+.ev p{margin:0;color:var(--soft);font-size:14.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--surface);text-decoration:none;color:var(--ink);cursor:pointer;max-width:100%}
+.chip svg{width:13px;height:13px;flex:none}
+.chip.wa{border-color:var(--ok);color:var(--ok)}
+.chip.code{font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.status{font-size:11px;letter-spacing:.08em;text-transform:none;padding:1px 8px;border-radius:999px;border:1px solid currentColor;margin-left:auto}
+.status.ok{color:var(--ok)}
+.status.pend{color:var(--warn)}
+.ev.opt{background:var(--sunk);border-radius:var(--r);padding:14px;border:1px dashed var(--gold);margin:10px 0}
+.ev.opt .t b{color:var(--gold)}
+.price{font-family:var(--display);font-size:16px;color:var(--gold);margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:10px 18px;border:0;background:var(--gold);color:#fff;font-weight:500;font-size:14.5px;text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn svg{width:16px;height:16px}
+
+.night{margin-top:14px;display:grid;grid-template-columns:78px 1fr;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.night .ph{width:78px;height:78px;border-radius:10px;background:var(--navy) center/cover no-repeat;display:grid;place-items:center;color:var(--gold-soft)}
+.night b{font-family:var(--display);font-weight:400;font-size:17px;display:block;line-height:1.25}
+.night .muted{font-size:13px}
+
+/* Secciones */
+.sec-head{padding-block:26px 6px}
+.sec-head h2{font-size:30px;margin-top:4px}
+.sec-head p{margin:6px 0 0;color:var(--soft)}
+.group{margin-top:22px}
+.group>h3{font-size:13px;font-family:var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--soft);font-weight:500;display:flex;align-items:center;gap:8px}
+.group>h3 svg{width:16px;height:16px;color:var(--gold)}
+.list{margin-top:10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.row{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:13px 14px;border-top:1px solid var(--line);align-items:start}
+.row:first-child{border-top:0}
+.row .d{text-align:center;line-height:1.1;border-right:1px solid var(--line);padding-right:10px}
+.row .d b{display:block;font-family:var(--display);font-weight:400;font-size:22px;font-variant-numeric:tabular-nums}
+.row .d span{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.row .x{min-width:0}
+.row .x b{font-weight:500;display:block;line-height:1.3}
+.row .x small{display:block;color:var(--soft);font-size:13px;margin-top:2px}
+
+/* Equipo */
+.concierge{position:relative;margin-top:18px;border-radius:var(--r);overflow:hidden;color:#fff;background:#0B0B0B center/cover no-repeat;min-height:220px;display:flex;align-items:flex-end}
+.concierge::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.92))}
+.concierge .in{position:relative;padding:18px;width:100%}
+.concierge h3{font-size:26px;margin:4px 0 2px}
+.concierge p{margin:0 0 12px;opacity:.9;font-size:14.5px}
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:10px}
+.person{display:grid;grid-template-columns:54px 1fr;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.av{width:54px;height:54px;border-radius:50%;background:var(--navy) center/cover no-repeat;color:var(--gold-soft);display:grid;place-items:center;font-family:var(--display);font-size:19px;letter-spacing:.04em}
+.person .x{min-width:0}
+.person b{font-family:var(--display);font-weight:400;font-size:17px;display:block;line-height:1.2}
+.person .r{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.person small{display:block;color:var(--soft);font-size:12.5px}
+.person .chips{margin-top:6px}
+
+/* Más */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin-top:12px}
+.card h3{font-size:20px}
+.card p,.card li{color:var(--soft);font-size:14.5px}
+.card ol,.card ul{margin:8px 0 0;padding-left:20px}
+.card .btn{margin-top:12px}
+.msg{margin-top:10px;font-size:13.5px;color:var(--warn)}
+.msg[hidden]{display:none}
+.tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:10px}
+.tip{background:var(--sunk);border-radius:12px;padding:12px 14px}
+.tip b{display:block;font-weight:500}
+.tip span{font-size:13.5px;color:var(--soft)}
+select{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);max-width:100%}
+.foot{padding-block:28px 10px;text-align:center;font-size:12px;color:var(--soft)}
+.foot .logo{color:var(--ink);margin:0 auto 8px;height:30px;display:flex;justify-content:center}
+.foot .logo svg{height:30px}
+
+/* WhatsApp flotante y barra */
+.fab{position:fixed;right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:8px;background:#1F7A4D;color:#fff;text-decoration:none;border-radius:999px;padding:12px 16px 12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.25);font-weight:500;font-size:14.5px}
+.fab svg{width:20px;height:20px}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:15;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabbar .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tabbar a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 2px 8px;text-decoration:none;font-size:11px;letter-spacing:.04em;color:var(--soft)}
+.tabbar a svg{width:22px;height:22px}
+.tabbar a[aria-current="page"]{color:var(--gold)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:13.5px;z-index:30;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+@media (min-width:700px){.hero .main{margin-top:150px}.ev{grid-template-columns:84px 1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="app">
+  <section class="tab-view" id="v-itinerario"></section>
+  <section class="tab-view" id="v-reservas" hidden></section>
+  <section class="tab-view" id="v-equipo" hidden></section>
+  <section class="tab-view" id="v-opcionales" hidden></section>
+  <section class="tab-view" id="v-mas" hidden></section>
+</div>
+<a class="fab" id="fab" target="_blank" rel="noopener"></a>
+<nav class="tabbar" aria-label="Secciones"><div class="in" id="tabs"></div></nav>
+<div class="toast" id="toast" role="status"></div>
+
+<script type="application/json" id="trip">__TRIP__</script>
+<script type="application/json" id="imgs">__IMGS__</script>
+<template id="logo">__LOGO__</template>
+<script>
+(function(){
+const T=JSON.parse(document.getElementById('trip').textContent);
+const IMG=JSON.parse(document.getElementById('imgs').textContent);
+const LOGO=document.getElementById('logo').innerHTML;
+const V=T.viaje, HOME=V.zona_casa;
+const B=Object.assign({nombre:'Concierge Operadora',corto:'Concierge',dominio:'operadoraconcierge.com',web:'https://www.operadoraconcierge.com'},T.marca||{});
+const inFrame=(()=>{try{return window.self!==window.top}catch(e){return true}})();
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const img=k=>k&&IMG[k]?IMG[k]:(k&&/^(https?:|data:)/.test(k)?k:'');
+const store={get(k){try{return localStorage.getItem('opc.'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem('opc.'+k,v)}catch(e){}}};
+
+/* Iconos de línea */
+const I={
+ vuelo:'<path d="M2.5 13.5l19-7-3 3-6 2 2 7-2 .5-3.5-6-4 1.5-1.5 2-1.2-.4.7-2.6-2-1.5z"/>',
+ traslado:'<path d="M3 16v-4l2-5h14l2 5v4"/><path d="M3 16h18v2H3z"/><circle cx="7.5" cy="16.5" r="1.5"/><circle cx="16.5" cy="16.5" r="1.5"/><path d="M5.5 11h13"/>',
+ hotel:'<path d="M3 19V6"/><path d="M3 15h18v4"/><path d="M21 15v-3a3 3 0 0 0-3-3h-7v6"/><circle cx="7" cy="11.5" r="2"/>',
+ restaurante:'<path d="M7 3v18"/><path d="M4 3v5a3 3 0 0 0 6 0V3"/><path d="M17 21V3c-2 1-3 4-3 7h3"/>',
+ excursion:'<path d="M3 20l6-11 4 6 3-4 5 9z"/><circle cx="16.5" cy="5.5" r="1.8"/>',
+ opcional:'<path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.5 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>',
+ libre:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+ bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+ people:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5.5 4.8"/>',
+ dots:'<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>',
+ pin:'<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+ copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>',
+ phone:'<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/>',
+ user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+ ticket:'<path d="M3 8a2 2 0 0 0 0 4v0a2 2 0 0 1 0 4v2h18v-2a2 2 0 0 1 0-4 2 2 0 0 0 0-4V6H3z"/><path d="M14 6v12" stroke-dasharray="2 2"/>'
+};
+const ic=(n,extra='')=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${I[n]||''}</svg>`;
+const WA_ICON='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.4-.3z"/></svg>';
+const TIPO={vuelo:'Vuelo',traslado:'Traslado',hotel:'Hotel',restaurante:'Restaurante',excursion:'Excursión',opcional:'Opcional',libre:'Tiempo libre'};
+
+/* Horas y zonas */
+function tzOffset(tz,d){const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(d);const g=t=>+p.find(x=>x.type===t).value;return(Date.UTC(g('year'),g('month')-1,g('day'),g('hour')%24,g('minute'),g('second'))-Math.floor(d.getTime()/1000)*1000)/60000}
+function toUTC(fecha,hora,tz){const[y,m,d]=fecha.split('-').map(Number);const[h,mi]=(hora||'12:00').split(':').map(Number);const g=Date.UTC(y,m-1,d,h,mi);return new Date(g-tzOffset(tz,new Date(g))*60000)}
+const fT=(date,tz)=>new Intl.DateTimeFormat('es-MX',{timeZone:tz,hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(date);
+const pd=f=>{const[y,m,d]=f.split('-').map(Number);return new Date(Date.UTC(y,m-1,d,12))};
+const fD=(f,o)=>new Intl.DateTimeFormat('es-MX',Object.assign({timeZone:'UTC'},o)).format(pd(f));
+const wk=f=>fD(f,{weekday:'short'}).replace('.','');
+const dayDiff=(a,b)=>Math.round((pd(b)-pd(a))/864e5);
+const cityShort=c=>c.split(' ').map(w=>w.length>3?w:'').join(' ').trim()||c;
+
+/* Datos derivados */
+const DAYS=T.dias.slice().sort((a,b)=>a.fecha.localeCompare(b.fecha));
+const dayOf=f=>DAYS.find(d=>d.fecha===f);
+const SRV=T.servicios.map((s,i)=>{const d=dayOf(s.fecha)||DAYS[0];return Object.assign({_i:i,_tz:d.zona,_at:toUTC(s.fecha,s.hora,d.zona)},s)}).sort((a,b)=>a._at-b._at);
+const CON=Object.fromEntries(T.contactos.map(c=>[c.id,c]));
+const waLink=(num,txt)=>`https://wa.me/${String(num).replace(/\D/g,'')}?text=${encodeURIComponent(txt)}`;
+const conciergeWA=txt=>waLink(V.concierge_whatsapp,txt||`Hola ${V.concierge_nombre.split(' ')[0]}, les escribe ${V.saludo} (viaje ${V.codigo}).`);
+const mapLink=q=>`https://maps.apple.com/?q=${encodeURIComponent(q)}`;
+const hotelFor=f=>T.hoteles.find(h=>h.entrada<=f&&f<h.salida);
+
+/* Reloj del viaje: real o simulado */
+let demoDay=store.get('demo')||'';
+function now(){if(demoDay){const d=dayOf(demoDay);if(d)return toUTC(d.fecha,'10:15',d.zona)}return new Date()}
+function localDate(date,tz){return new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(date)}
+function currentDay(){const n=now();for(const d of DAYS){if(localDate(n,d.zona)===d.fecha)return d}return null}
+
+let selDay=null;
+function render(){
+  const cd=currentDay(), n=now();
+  if(!selDay||!dayOf(selDay))selDay=cd?cd.fecha:DAYS[0].fecha;
+  renderItin(cd,n);renderReservas();renderEquipo();renderOpc();renderMas();
+  $('#fab').href=conciergeWA();
+  $('#fab').innerHTML=WA_ICON+'<span>Concierge</span>';
+}
+
+function heroStatus(cd){
+  const today=localDate(now(),DAYS[0].zona);
+  if(cd){return `Día ${DAYS.indexOf(cd)+1} de ${DAYS.length}`}
+  const dd=dayDiff(today,V.inicio);
+  if(dd>0)return dd===1?'Mañana comienza su viaje':`Faltan ${dd} días`;
+  return 'Gracias por viajar con '+B.nombre;
+}
+
+function evHTML(s,showDate){
+  const isOpt=s.tipo==='opcional';
+  const c=CON[s.contacto];
+  const st=s.estado==='confirmado'?'<span class="status ok">Confirmado</span>':s.estado==='opcional'?'':`<span class="status pend">${esc(s.estado||'')}</span>`;
+  const chips=[];
+  if(s.modalidad)chips.push(`<span class="chip">${ic('ticket')}${esc(s.modalidad)}</span>`);
+  if(c&&!isOpt)chips.push(`<a class="chip wa" href="${waLink(c.whatsapp,`Hola ${c.nombre.split(' ')[0]}, somos ${V.saludo}.`)}" target="_blank" rel="noopener">${WA_ICON}${esc(c.nombre)} · ${esc(c.rol.toLowerCase())}</a>`);
+  if(s.confirmacion&&!isOpt)chips.push(`<button class="chip code" data-copy="${esc(s.confirmacion)}">${ic('copy')}${esc(s.confirmacion)}</button>`);
+  if(s.lugar)chips.push(`<a class="chip" href="${mapLink(s.lugar)}" target="_blank" rel="noopener">${ic('pin')}Mapa</a>`);
+  const mx=fT(s._at,HOME);
+  return `<article class="ev${isOpt?' opt':''}">
+   <div class="t"><b>${esc(s.hora)}</b><small>${mx} ${esc(V.ciudad_casa)}</small>${showDate?`<small>${fD(s.fecha,{day:'numeric',month:'short'})}</small>`:''}</div>
+   <div class="body">
+    <div class="type">${ic(s.tipo)}${esc(TIPO[s.tipo]||s.tipo)}${st}</div>
+    <h3>${esc(s.titulo)}</h3>
+    ${s.detalle?`<p>${esc(s.detalle)}</p>`:''}
+    ${chips.length?`<div class="chips">${chips.join('')}</div>`:''}
+    ${isOpt?`<div class="price">${esc(s.precio)}</div><a class="btn" style="margin-top:10px" target="_blank" rel="noopener" href="${conciergeWA(`Hola ${V.concierge_nombre.split(' ')[0]}, nos interesa agregar: ${s.titulo} (${fD(s.fecha,{day:'numeric',month:'long'})}). Viaje ${V.codigo}.`)}">${WA_ICON}Solicitar a mi concierge</a>`:''}
+   </div></article>`;
+}
+
+function renderItin(cd,n){
+  const d=dayOf(selDay), idx=DAYS.indexOf(d);
+  const tzNow=cd?cd.zona:DAYS[0].zona;
+  const evs=SRV.filter(s=>s.fecha===selDay);
+  const nxt=SRV.find(s=>s._at>n&&s.tipo!=='opcional'&&s.tipo!=='libre');
+  const h=hotelFor(selDay);
+  const cover=img(V.foto_portada);
+  $('#v-itinerario').innerHTML=`
+  <header class="hero wrap" style="${cover?`background-image:url(${cover})`:''}">
+    <div class="top"><span class="logo" role="img" aria-label="${esc(B.nombre)}">${LOGO}</span><span class="code">${esc(V.codigo)}</span></div>
+    <div class="main">
+      <div class="hi">Bienvenidos, ${esc(V.saludo)}</div>
+      <h1>${esc(V.programa).replace(/(\S+)$/,'<em>$1</em>')}</h1>
+      <p>${esc(V.resumen)}</p>
+      <div class="facts"><span class="pill">${fD(V.inicio,{day:'numeric',month:'short'})} – ${fD(V.fin,{day:'numeric',month:'short',year:'numeric'})}</span><span class="pill">${esc(V.pax)}</span><span class="pill gold">${heroStatus(cd)}</span></div>
+    </div>
+  </header>
+  <div class="clocks">
+    <div class="clock"><span>${esc((cd||DAYS[0]).ciudad)}</span><b id="clkA">${fT(n,tzNow)}</b><small>Hora local</small></div>
+    <div class="clock"><span>${esc(V.ciudad_casa)}</span><b id="clkB">${fT(n,HOME)}</b><small>${(()=>{const o=(tzOffset(tzNow,n)-tzOffset(HOME,n))/60;return o?`${Math.abs(o)} h ${o>0?'menos':'más'} que allá`:'Misma hora'})()}</small></div>
+  </div>
+  <div class="wrap">
+    ${nxt?`<div class="next"><div class="ic">${ic(nxt.tipo,'width="20" height="20"')}</div><div class="k">Lo siguiente · ${fD(nxt.fecha,{weekday:'long',day:'numeric'})}, ${esc(nxt.hora)}</div><b>${esc(nxt.titulo)}</b></div>`:''}
+    <div class="days" role="group" aria-label="Días del viaje">${DAYS.map((x,i)=>`<button class="day-chip${cd&&cd.fecha===x.fecha?' today':''}" aria-pressed="${x.fecha===selDay}" data-day="${x.fecha}"><span class="w">${wk(x.fecha)}</span><span class="n">${pd(x.fecha).getUTCDate()}</span><span class="c">${esc(cityShort(x.ciudad))}</span></button>`).join('')}</div>
+    <div class="band${img(d.foto)?'':' plain'}" style="${img(d.foto)?`background-image:url(${img(d.foto)})`:''}">
+      <div class="in"><div class="k">Día ${idx+1} · ${fD(d.fecha,{weekday:'long',day:'numeric',month:'long'})}</div><h2>${esc(d.titulo)}</h2>
+      <div class="meta"><span>${esc(d.ciudad)}</span><span id="wx">${esc(d.clima||'')}</span></div></div>
+    </div>
+    <div class="timeline">${evs.map(s=>evHTML(s)).join('')||'<p class="muted" style="padding:16px 0">Día libre para disfrutar a su ritmo.</p>'}</div>
+    ${h?`<div class="night"><div class="ph" style="${img(h.foto)?`background-image:url(${img(h.foto)})`:''}">${img(h.foto)?'':ic('hotel','width="28" height="28"')}</div><div><span class="kicker">Esta noche</span><b>${esc(h.nombre)}</b><div class="muted">${esc(h.habitacion)} · Conf. ${esc(h.confirmacion)}</div></div></div>`:''}
+    <div class="foot"><div class="logo">${LOGO}</div>${esc(V.nota||'')}</div>
+  </div>`;
+  liveWeather(d);
+}
+
+function rowHTML(f,title,sub,extra){return `<div class="row"><div class="d"><b>${pd(f).getUTCDate()}</b><span>${fD(f,{month:'short'}).replace('.','')}</span></div><div class="x"><b>${esc(title)}</b>${sub?`<small>${sub}</small>`:''}${extra?`<div class="chips">${extra}</div>`:''}</div></div>`}
+const copyChip=c=>c?`<button class="chip code" data-copy="${esc(c)}">${ic('copy')}${esc(c)}</button>`:'';
+function renderReservas(){
+  const grp=(tipo,label)=>{const L=SRV.filter(s=>s.tipo===tipo);if(!L.length)return'';return `<div class="group"><h3>${ic(tipo)}${label}</h3><div class="list">${L.map(s=>rowHTML(s.fecha,s.titulo,`${esc(s.hora)} h · ${fT(s._at,HOME)} ${esc(V.ciudad_casa)}${s.modalidad?' · '+esc(s.modalidad):''}${CON[s.contacto]?' · '+esc(CON[s.contacto].nombre):''}`,copyChip(s.confirmacion)+(s.estado&&s.estado!=='confirmado'?`<span class="status pend">${esc(s.estado)}</span>`:''))).join('')}</div></div>`};
+  const hot=`<div class="group"><h3>${ic('hotel')}Hoteles</h3><div class="list">${T.hoteles.map(h=>rowHTML(h.entrada,h.nombre,`${esc(h.ciudad)} · ${dayDiff(h.entrada,h.salida)} noche${dayDiff(h.entrada,h.salida)>1?'s':''} · ${esc(h.habitacion)}`,copyChip(h.confirmacion)+`<a class="chip" href="${mapLink(h.direccion)}" target="_blank" rel="noopener">${ic('pin')}Mapa</a>`)).join('')}</div></div>`;
+  $('#v-reservas').innerHTML=`<div class="wrap"><div class="sec-head"><div class="kicker">Todo confirmado</div><h2>Sus reservas</h2><p>Toque un código para copiarlo. Las horas son locales, con la hora de ${esc(V.ciudad_casa)} al lado.</p></div>
+  ${grp('vuelo','Vuelos')}${hot}${grp('traslado','Traslados')}${grp('restaurante','Restaurantes')}${grp('excursion','Excursiones incluidas')}</div>`;
+}
+
+const initials=n=>n.split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+function personHTML(c){const ph=img(c.foto);return `<div class="person"><div class="av" style="${ph?`background-image:url(${ph})`:''}">${ph?'':esc(initials(c.nombre))}</div><div class="x"><span class="r">${esc(c.rol)}</span><b>${esc(c.nombre)}</b><small>${esc(c.ciudad)}${c.nota?' · '+esc(c.nota):''}</small><div class="chips"><a class="chip wa" target="_blank" rel="noopener" href="${waLink(c.whatsapp,`Hola ${c.nombre.split(' ')[0]}, somos ${V.saludo}.`)}">${WA_ICON}WhatsApp</a><button class="chip code" data-copy="${esc(c.telefono)}">${ic('phone')}${esc(c.telefono)}</button></div></div></div>`}
+function renderEquipo(){
+  const byCity={};T.contactos.filter(c=>c.id!=='concierge').forEach(c=>{(byCity[c.ciudad]=byCity[c.ciudad]||[]).push(c)});
+  $('#v-equipo').innerHTML=`<div class="wrap"><div class="sec-head"><div class="kicker">Siempre a un mensaje</div><h2>Su equipo</h2></div>
+  <div class="concierge" style="${img(V.foto_concierge||'campana')?`background-image:url(${img(V.foto_concierge||'campana')})`:''}"><div class="in"><span class="kicker" style="color:var(--gold-soft)">Su concierge personal</span><h3>${esc(V.concierge_nombre)}</h3><p>${esc(V.concierge_horario)}. Escríbanos para cualquier cambio, antojo o imprevisto.</p><a class="btn" style="background:#1F7A4D" target="_blank" rel="noopener" href="${conciergeWA()}">${WA_ICON}Escribir por WhatsApp</a></div></div>
+  ${Object.entries(byCity).map(([city,L])=>`<div class="group"><h3>${ic('pin')}${esc(city)}</h3><div class="people">${L.map(personHTML).join('')}</div></div>`).join('')}
+  ${(T.emergencias||[]).length?`<div class="group"><h3>${ic('phone')}Emergencias${V.pais?' en '+esc(V.pais):''}</h3><div class="list">${T.emergencias.map(e=>rowHTMLsimple(esc(e.numero),esc(e.nombre))).join('')}</div></div>`:''}</div>`;
+}
+function rowHTMLsimple(n,l){return `<div class="row"><div class="d"><b style="font-size:17px">${n}</b></div><div class="x"><b>${l}</b><small>Avísenos también por WhatsApp para coordinar todo por ustedes.</small></div></div>`}
+
+function renderOpc(){
+  const L=SRV.filter(s=>s.tipo==='opcional');
+  $('#v-opcionales').innerHTML=`<div class="wrap"><div class="sec-head"><div class="kicker">A su medida</div><h2>Experiencias opcionales</h2><p>Seleccionadas para su itinerario. Pídalas a su concierge y nosotros nos ocupamos del resto.</p></div>
+  <div class="timeline">${L.map(s=>evHTML(s,true)).join('')}</div></div>`;
+}
+
+function renderMas(){
+  const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+  $('#v-mas').innerHTML=`<div class="wrap"><div class="sec-head"><div class="kicker">Su viaje en el bolsillo</div><h2>Más</h2></div>
+  <div class="card"><h3>${standalone?'App instalada':'Instale la app en su iPhone'}</h3>${standalone?'<p>Listo: su viaje ya vive en su pantalla de inicio y funciona sin conexión.</p>':`<ol><li>Abra este enlace en <b>Safari</b>.</li><li>Toque <b>Compartir</b> (el cuadro con la flecha hacia arriba).</li><li>Elija <b>Agregar a pantalla de inicio</b> y luego <b>Agregar</b>.</li></ol><p style="margin-top:8px">En Android: menú ⋮ → <b>Instalar app</b>.</p>`}</div>
+  <div class="card"><h3>Avisos del viaje</h3><p>Reciba un recordatorio antes de cada vuelo, traslado y reserva.</p><button class="btn" id="btnNotif">${ic('bell')}Activar avisos</button><div class="msg" id="msgNotif" hidden></div></div>
+  <div class="card"><h3>Agregar a su calendario</h3><p>Todo el itinerario en el Calendario de su iPhone, con alerta 1 hora antes.</p><button class="btn ghost" id="btnIcs">${ic('cal')}Descargar calendario</button><div class="msg" id="msgIcs" hidden></div></div>
+  ${(T.tips||[]).length?`<div class="card"><h3>Antes de salir</h3><div class="tips">${T.tips.map(t=>`<div class="tip"><b>${esc(t.titulo)}</b><span>${esc(t.texto)}</span></div>`).join('')}</div></div>`:''}
+  <div class="card"><h3>Modo demostración</h3><p>Vea la app como la verá el viajero un día del viaje.</p>
+   <label for="demoSel" class="muted" style="display:block;margin-top:8px;font-size:13px">Simular el día</label>
+   <select id="demoSel"><option value="">Hoy (fecha real)</option>${DAYS.map((d,i)=>`<option value="${d.fecha}"${d.fecha===demoDay?' selected':''}>Día ${i+1} · ${fD(d.fecha,{day:'numeric',month:'short'})} · ${esc(d.ciudad)}</option>`).join('')}</select></div>
+  <div class="foot"><div class="logo">${LOGO}</div>${esc(V.agencia)} · ${esc(V.codigo)}<br><a href="${esc(B.web)}" target="_blank" rel="noopener">${esc(B.dominio)}</a>${V.nota?'<br>'+esc(V.nota):''}</div></div>`;
+  $('#btnNotif').onclick=enableNotif;
+  $('#btnIcs').onclick=downloadIcs;
+  $('#demoSel').onchange=e=>{demoDay=e.target.value;store.set('demo',demoDay);selDay=null;render();toast(demoDay?'Vista del día simulada':'Fecha real')};
+}
+
+function say(id,txt){const m=$(id);m.textContent=txt;m.hidden=false}
+async function enableNotif(){
+  if(inFrame||!('Notification' in window)){say('#msgNotif','Los avisos se activan desde la app instalada en su pantalla de inicio (iPhone con iOS 16.4 o posterior).');return}
+  const p=await Notification.requestPermission();
+  if(p!=='granted'){say('#msgNotif','Los avisos están desactivados. Puede activarlos en Ajustes → Notificaciones.');return}
+  const nx=SRV.find(s=>s._at>now()&&s.tipo!=='opcional')||SRV[0];
+  const body=`${fD(nx.fecha,{weekday:'long',day:'numeric'})}, ${nx.hora} h: ${nx.titulo}`;
+  try{const r=await navigator.serviceWorker.ready;r.showNotification(B.corto+' · Su próximo servicio',{body,icon:'icon-192.png',badge:'icon-192.png'})}catch(e){new Notification(B.corto+' · Su próximo servicio',{body})}
+  say('#msgNotif','Avisos activados. Le enviamos uno de prueba.');
+}
+function downloadIcs(){
+  if(inFrame){say('#msgIcs','La descarga del calendario funciona desde la app instalada.');return}
+  const z=d=>d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//'+B.nombre+'//Concierge//ES','CALSCALE:GREGORIAN'];
+  SRV.filter(s=>s.tipo!=='opcional').forEach(s=>{const e=new Date(s._at.getTime()+3600e3);L.push('BEGIN:VEVENT',`UID:${V.codigo}-${s._i}@${B.dominio}`,`DTSTAMP:${z(new Date())}`,`DTSTART:${z(s._at)}`,`DTEND:${z(e)}`,`SUMMARY:${s.titulo.replace(/[,;]/g,'\\$&')}`,`DESCRIPTION:${(s.detalle+(s.confirmacion?' · '+s.confirmacion:'')).replace(/[,;]/g,'\\$&')}`,`LOCATION:${(s.lugar||'').replace(/[,;]/g,'\\$&')}`,'BEGIN:VALARM','TRIGGER:-PT1H','ACTION:DISPLAY','DESCRIPTION:'+B.corto,'END:VALARM','END:VEVENT')});
+  L.push('END:VCALENDAR');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.join('\r\n')],{type:'text/calendar'}));a.download=`${B.corto.replace(/\s+/g,'_')}_${V.codigo}.ics`;document.body.appendChild(a);a.click();a.remove();
+}
+
+/* Clima en vivo si el viaje está a menos de 14 días (solo en la app instalada) */
+async function liveWeather(d){
+  if(inFrame||d.lat==null)return;
+  const dd=dayDiff(localDate(new Date(),d.zona),d.fecha);if(dd<0||dd>14)return;
+  try{const r=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&timezone=auto&start_date=${d.fecha}&end_date=${d.fecha}`);const j=await r.json();const D=j.daily;if(!D)return;
+   const el=$('#wx');if(el&&selDay===d.fecha)el.textContent=`${Math.round(D.temperature_2m_min[0])}–${Math.round(D.temperature_2m_max[0])} °C · lluvia ${D.precipitation_probability_max[0]}% · viento ${Math.round(D.wind_speed_10m_max[0])} km/h`}catch(e){}
+}
+
+/* Navegación */
+const TABS=[['itinerario','Itinerario','cal'],['reservas','Reservas','ticket'],['equipo','Equipo','people'],['opcionales','Opcionales','opcional'],['mas','Más','dots']];
+$('#tabs').innerHTML=TABS.map(([id,l,i])=>`<a href="#${id}" data-tab="${id}">${ic(i)}<span>${l}</span></a>`).join('');
+function route(){const h=(location.hash||'').slice(1);const id=TABS.some(t=>t[0]===h)?h:'itinerario';TABS.forEach(([t])=>{$('#v-'+t).hidden=t!==id;const a=document.querySelector(`[data-tab="${t}"]`);if(t===id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});window.scrollTo(0,0)}
+window.addEventListener('hashchange',route);
+
+let tt;function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),1600)}
+document.addEventListener('click',e=>{
+  const dc=e.target.closest('[data-day]');if(dc){selDay=dc.dataset.day;const sx=document.querySelector('.days').scrollLeft;renderItin(currentDay(),now());document.querySelector('.days').scrollLeft=sx;return}
+  const cp=e.target.closest('[data-copy]');if(cp){const v=cp.dataset.copy;(navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(()=>toast('Copiado: '+v)).catch(()=>toast(v));}
+});
+setInterval(()=>{const n=now(),cd=currentDay();const a=$('#clkA'),b=$('#clkB');if(a)a.textContent=fT(n,(cd||DAYS[0]).zona);if(b)b.textContent=fT(n,HOME)},30000);
+
+render();route();
+const chip=document.querySelector('.day-chip[aria-pressed="true"]');if(chip)chip.scrollIntoView({inline:'center',block:'nearest'});
+window.scrollTo(0,0);
+})();
+</script>
+
+<script>if('serviceWorker' in navigator&&!/^(about|blob)/.test(location.protocol)&&window.self===window.top){navigator.serviceWorker.register('sw.js')}</script>
+</body></html>

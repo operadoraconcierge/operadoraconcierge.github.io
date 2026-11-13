@@ -1,0 +1,12 @@
+{
+ "nombre": "Concierge Operadora",
+ "corto": "Concierge",
+ "dominio": "operadoraconcierge.com",
+ "web": "https://www.operadoraconcierge.com",
+ "prefijo_codigo": "OPC",
+ "concierge_nombre": "Concierge Operadora",
+ "concierge_whatsapp": "5210000000000",
+ "concierge_telefono": "+52 1 00 0000 0000",
+ "concierge_horario": "24/7 durante su viaje, en horario de México",
+ "_pendiente": "Cambiar concierge_whatsapp y concierge_telefono por el número real (formato 521 + 10 dígitos para WhatsApp)."
+}
