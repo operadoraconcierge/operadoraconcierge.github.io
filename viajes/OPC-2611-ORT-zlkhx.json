@@ -1,0 +1,399 @@
+{
+ "viaje": {
+  "codigo": "OPC-2611-ORT",
+  "programa": "Las Vegas Grand Prix",
+  "resumen": "Fórmula 1, Backstreet Boys en Sphere y cuatro noches en el Strip.",
+  "viajeros": "Daniel y Sofía Ortega",
+  "saludo": "Sres. Ortega",
+  "pax": "2 adultos",
+  "inicio": "2026-11-18",
+  "fin": "2026-11-22",
+  "zona_casa": "America/Mexico_City",
+  "ciudad_casa": "CDMX",
+  "agencia": "Viajes Altamira (agencia de ejemplo)",
+  "concierge_nombre": "Concierge Operadora",
+  "concierge_whatsapp": "5210000000000",
+  "concierge_horario": "24/7 durante su viaje, en horario de México",
+  "foto_portada": "",
+  "foto_concierge": "",
+  "pais": "Estados Unidos",
+  "nota": "Viaje de demostración. Nombres, teléfonos y confirmaciones son ficticios.",
+  "ruta": "OPC-2611-ORT-zlkhx"
+ },
+ "servicios": [
+  {
+   "fecha": "2026-11-18",
+   "hora": "10:35",
+   "tipo": "vuelo",
+   "titulo": "Llegada a Las Vegas (LAS)",
+   "detalle": "Aeroméxico AM 0458 desde CDMX (sale 08:55). Terminal 3. Migración en el aeropuerto: tengan a mano pasaporte y visa.",
+   "modalidad": "",
+   "contacto": "",
+   "confirmacion": "Localizador KJ7RTW",
+   "lugar": "Harry Reid International Airport",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-18",
+   "hora": "11:30",
+   "tipo": "traslado",
+   "titulo": "Recepción VIP y traslado al hotel",
+   "detalle": "Marcus los espera en la salida de equipaje con un cartel a nombre de Ortega. Agua y snacks a bordo. Aprox. 20 min.",
+   "modalidad": "Privado",
+   "contacto": "chofer_lv",
+   "confirmacion": "TR-2101",
+   "lugar": "Harry Reid International Airport",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-18",
+   "hora": "15:00",
+   "tipo": "hotel",
+   "titulo": "Check-in en Bellagio",
+   "detalle": "Suite con vista a las fuentes. Su kit de bienvenida Concierge Sports (gorras, credenciales y guía del fin de semana) los espera en la habitación.",
+   "modalidad": "",
+   "contacto": "",
+   "confirmacion": "BLG-77420",
+   "lugar": "Bellagio Las Vegas",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-18",
+   "hora": "20:30",
+   "tipo": "restaurante",
+   "titulo": "Cena de bienvenida en Carbone",
+   "detalle": "Clásicos italoamericanos en ARIA. Pidan el spicy rigatoni vodka.",
+   "modalidad": "Reserva para 2",
+   "contacto": "",
+   "confirmacion": "Reserva CB-1188",
+   "lugar": "Carbone, ARIA Resort & Casino",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-19",
+   "hora": "09:00",
+   "tipo": "opcional",
+   "titulo": "Helicóptero al Gran Cañón con aterrizaje",
+   "detalle": "Vuelo sobre la presa Hoover y el Strip, aterrizaje en el cañón con brindis. Regreso a las 13:30.",
+   "modalidad": "Privado con traslado",
+   "contacto": "",
+   "confirmacion": "",
+   "lugar": "Maverick Helicopters, Las Vegas",
+   "estado": "opcional",
+   "precio": "USD 690 por persona"
+  },
+  {
+   "fecha": "2026-11-19",
+   "hora": "13:30",
+   "tipo": "libre",
+   "titulo": "Tarde libre",
+   "detalle": "Les sugerimos la alberca del hotel o compras en The Shops at Crystals. Su concierge puede reservar spa.",
+   "modalidad": "",
+   "contacto": "",
+   "confirmacion": "",
+   "lugar": "",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-19",
+   "hora": "18:15",
+   "tipo": "traslado",
+   "titulo": "Traslado a Sphere",
+   "detalle": "Marcus los recoge en el lobby de Bellagio. Acceso por la entrada VIP.",
+   "modalidad": "Privado",
+   "contacto": "chofer_lv",
+   "confirmacion": "TR-2102",
+   "lugar": "Lobby de Bellagio",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-19",
+   "hora": "19:30",
+   "tipo": "excursion",
+   "titulo": "Backstreet Boys en Sphere",
+   "detalle": "Concierto en la pantalla inmersiva más grande del mundo. Asientos sección 200, centrales, con acceso a lounge.",
+   "modalidad": "Boletos para 2",
+   "contacto": "host_lv",
+   "confirmacion": "SPH-4471-BSB",
+   "lugar": "Sphere, 255 Sands Ave",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-20",
+   "hora": "12:00",
+   "tipo": "excursion",
+   "titulo": "Fan Zone y recorrido del circuito",
+   "detalle": "Gabriela los lleva a la Fan Zone de la F1 y a un recorrido por las curvas más famosas del circuito del Strip.",
+   "modalidad": "Grupo Concierge Sports",
+   "contacto": "host_lv",
+   "confirmacion": "EX-2201",
+   "lugar": "Bellagio Fountain Club",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-20",
+   "hora": "17:30",
+   "tipo": "excursion",
+   "titulo": "Clasificación del Gran Premio",
+   "detalle": "Grada principal frente a la recta del Strip. Credenciales en su kit de bienvenida.",
+   "modalidad": "Grada T-Mobile Zone",
+   "contacto": "host_lv",
+   "confirmacion": "F1-LV-Q-3390",
+   "lugar": "Las Vegas Strip Circuit",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-20",
+   "hora": "17:30",
+   "tipo": "opcional",
+   "titulo": "Mejora a Paddock Club",
+   "detalle": "Hospitality con barra libre, menú de chef, visita al pit lane y vista directa a los garajes.",
+   "modalidad": "Por persona",
+   "contacto": "",
+   "confirmacion": "",
+   "lugar": "Paddock Club, Las Vegas Grand Prix",
+   "estado": "opcional",
+   "precio": "USD 4,800 por persona"
+  },
+  {
+   "fecha": "2026-11-20",
+   "hora": "21:30",
+   "tipo": "restaurante",
+   "titulo": "Cena en Nobu",
+   "detalle": "Mesa en el salón principal de Caesars Palace. Recomendado: black cod miso.",
+   "modalidad": "Reserva para 2",
+   "contacto": "",
+   "confirmacion": "Reserva NB-5530",
+   "lugar": "Nobu, Caesars Palace",
+   "estado": "por confirmar",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-21",
+   "hora": "11:00",
+   "tipo": "opcional",
+   "titulo": "Brunch con vista al circuito",
+   "detalle": "Brunch de champaña en una terraza privada sobre el Strip.",
+   "modalidad": "Grupo reducido",
+   "contacto": "",
+   "confirmacion": "",
+   "lugar": "Terraza privada, Las Vegas Strip",
+   "estado": "opcional",
+   "precio": "USD 450 por persona"
+  },
+  {
+   "fecha": "2026-11-21",
+   "hora": "18:30",
+   "tipo": "traslado",
+   "titulo": "Traslado al circuito",
+   "detalle": "Marcus los deja en el acceso más cercano a su grada. Por el cierre de calles, sigan la señalética Concierge Sports para el regreso.",
+   "modalidad": "Privado",
+   "contacto": "chofer_lv",
+   "confirmacion": "TR-2103",
+   "lugar": "Lobby de Bellagio",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-21",
+   "hora": "20:00",
+   "tipo": "excursion",
+   "titulo": "Gran Premio de Las Vegas · Carrera",
+   "detalle": "La carrera nocturna sobre el Strip. Lleven chamarra: la temperatura baja de noche.",
+   "modalidad": "Grada T-Mobile Zone",
+   "contacto": "host_lv",
+   "confirmacion": "F1-LV-R-3390",
+   "lugar": "Las Vegas Strip Circuit",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-22",
+   "hora": "10:30",
+   "tipo": "traslado",
+   "titulo": "Traslado al aeropuerto",
+   "detalle": "Marcus los recoge en el lobby de Bellagio. Aprox. 20 min.",
+   "modalidad": "Privado",
+   "contacto": "chofer_lv",
+   "confirmacion": "TR-2104",
+   "lugar": "Lobby de Bellagio",
+   "estado": "confirmado",
+   "precio": ""
+  },
+  {
+   "fecha": "2026-11-22",
+   "hora": "13:20",
+   "tipo": "vuelo",
+   "titulo": "Vuelo de regreso a CDMX",
+   "detalle": "Aeroméxico AM 0459 · LAS 13:20 → MEX 18:55. Terminal 3.",
+   "modalidad": "",
+   "contacto": "",
+   "confirmacion": "Localizador KJ7RTW",
+   "lugar": "Harry Reid International Airport",
+   "estado": "confirmado",
+   "precio": ""
+  }
+ ],
+ "dias": [
+  {
+   "fecha": "2026-11-18",
+   "ciudad": "Las Vegas",
+   "zona": "America/Los_Angeles",
+   "titulo": "Bienvenidos a Las Vegas",
+   "foto": "",
+   "clima": "10–20 °C · noches frescas",
+   "lat": 36.17,
+   "lon": -115.14
+  },
+  {
+   "fecha": "2026-11-19",
+   "ciudad": "Las Vegas",
+   "zona": "America/Los_Angeles",
+   "titulo": "Una noche en Sphere",
+   "foto": "",
+   "clima": "10–20 °C · noches frescas",
+   "lat": 36.17,
+   "lon": -115.14
+  },
+  {
+   "fecha": "2026-11-20",
+   "ciudad": "Las Vegas",
+   "zona": "America/Los_Angeles",
+   "titulo": "Clasificación sobre el Strip",
+   "foto": "",
+   "clima": "9–19 °C · lleve chamarra",
+   "lat": 36.17,
+   "lon": -115.14
+  },
+  {
+   "fecha": "2026-11-21",
+   "ciudad": "Las Vegas",
+   "zona": "America/Los_Angeles",
+   "titulo": "Noche de carrera",
+   "foto": "",
+   "clima": "9–19 °C · lleve chamarra",
+   "lat": 36.17,
+   "lon": -115.14
+  },
+  {
+   "fecha": "2026-11-22",
+   "ciudad": "Las Vegas",
+   "zona": "America/Los_Angeles",
+   "titulo": "Hasta pronto",
+   "foto": "",
+   "clima": "10–20 °C · soleado",
+   "lat": 36.17,
+   "lon": -115.14
+  }
+ ],
+ "contactos": [
+  {
+   "id": "concierge",
+   "rol": "Su concierge",
+   "nombre": "Concierge Operadora",
+   "telefono": "+52 1 00 0000 0000",
+   "whatsapp": "5210000000000",
+   "ciudad": "Todo el viaje",
+   "nota": "Grupo de WhatsApp 24/7 con su agente y el equipo de Concierge Operadora.",
+   "foto": ""
+  },
+  {
+   "id": "agente",
+   "rol": "Su agente de viajes",
+   "nombre": "Paola Mendívil",
+   "telefono": "+52 55 2345 6789",
+   "whatsapp": "5215523456789",
+   "ciudad": "Viajes Altamira, CDMX",
+   "nota": "",
+   "foto": ""
+  },
+  {
+   "id": "ventas",
+   "rol": "Concierge Sports",
+   "nombre": "Ventas Concierge Sports",
+   "telefono": "+52 55 0000 0000",
+   "whatsapp": "5215500000000",
+   "ciudad": "CDMX",
+   "nota": "Diseño del viaje",
+   "foto": ""
+  },
+  {
+   "id": "chofer_lv",
+   "rol": "Chofer privado",
+   "nombre": "Marcus Reed",
+   "telefono": "+1 702 555 0142",
+   "whatsapp": "17025550142",
+   "ciudad": "Las Vegas",
+   "nota": "Cadillac Escalade negra · habla español",
+   "foto": ""
+  },
+  {
+   "id": "host_lv",
+   "rol": "Anfitriona Concierge Sports",
+   "nombre": "Gabriela Torres",
+   "telefono": "+1 702 555 0187",
+   "whatsapp": "17025550187",
+   "ciudad": "Las Vegas",
+   "nota": "Los acompaña en Sphere y en el circuito",
+   "foto": ""
+  }
+ ],
+ "hoteles": [
+  {
+   "id": "bellagio",
+   "nombre": "Bellagio",
+   "ciudad": "Las Vegas",
+   "entrada": "2026-11-18",
+   "salida": "2026-11-22",
+   "habitacion": "Suite con vista a las fuentes · desayuno incluido",
+   "confirmacion": "BLG-77420",
+   "direccion": "3600 S Las Vegas Blvd, Las Vegas, NV",
+   "telefono": "+1 702 693 7111",
+   "foto": ""
+  }
+ ],
+ "tips": [
+  {
+   "titulo": "Documentos",
+   "texto": "Pasaporte vigente y visa de Estados Unidos. Lleven impresas sus credenciales de F1 por si falla el celular."
+  },
+  {
+   "titulo": "Clima",
+   "texto": "Días templados y noches frías en noviembre. Para la carrera, chamarra y algo para las manos."
+  },
+  {
+   "titulo": "Dinero y propinas",
+   "texto": "Dólares y tarjeta en todo. Propina de 18 a 22 % en restaurantes; choferes y bell boys, USD 5 a 20."
+  },
+  {
+   "titulo": "Cierres de calles",
+   "texto": "Durante el Gran Premio el Strip cierra por tramos. Salgan con tiempo y sigan las indicaciones de su chofer."
+  },
+  {
+   "titulo": "Enchufes",
+   "texto": "120 V, tipo A/B, igual que en México. No necesitan adaptador."
+  },
+  {
+   "titulo": "Diferencia horaria",
+   "texto": "Las Vegas va 2 horas atrás de CDMX."
+  }
+ ],
+ "emergencias": [
+  {
+   "numero": "911",
+   "nombre": "Policía, bomberos y ambulancia"
+  }
+ ],
+ "estado": "listo",
+ "liga": "",
+ "actualizado": "2026-11-14T12:05:00Z"
+}
