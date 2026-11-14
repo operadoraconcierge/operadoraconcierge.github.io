@@ -129,7 +129,7 @@ let tt;const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('on')
 const TIPOS=[['vuelo','Vuelo'],['traslado','Traslado'],['hotel','Hotel'],['restaurante','Restaurante'],['excursion','Excursión'],['opcional','Opcional'],['libre','Tiempo libre']];
 const ESTADOS=['confirmado','por confirmar','opcional'];
 const MARCA={nombre:'Concierge Operadora',corto:'Concierge',dominio:'operadoraconcierge.com',web:'https://www.operadoraconcierge.com'};
-const WA_EJEMPLO='5210000000000';
+const WA_EJEMPLO='5215500000000';
 const esEjemplo=n=>String(n||'').replace(/\D/g,'')===WA_EJEMPLO;
 const FOTOS=[['','Sin foto (fondo negro)'],['glaciar','Glaciar'],['eolo','Estepa / EOLO'],['bosque','Bosque / Ushuaia'],['campana','Campana concierge']];
 const CIUDADES={
@@ -196,7 +196,7 @@ const okDate=f=>/^\d{4}-\d{2}-\d{2}$/.test(f||'');
 function blankTrip(){
   const t=new Date();t.setUTCDate(t.getUTCDate()+30);const a=iso(t);t.setUTCDate(t.getUTCDate()+6);const b=iso(t);
   return {estado:'borrador',liga:'',viaje:{codigo:'',programa:'',resumen:'',viajeros:'',saludo:'',pax:'2 adultos',inicio:a,fin:b,zona_casa:'America/Mexico_City',ciudad_casa:'CDMX',agencia:'',concierge_nombre:'Concierge Operadora',concierge_whatsapp:WA_EJEMPLO,concierge_horario:'24/7 durante su viaje, en horario de México',foto_portada:'',foto_concierge:'campana',pais:'',nota:''},
-    contactos:[{id:'concierge',rol:'Su concierge',nombre:'Concierge Operadora',telefono:'+52 1 00 0000 0000',whatsapp:WA_EJEMPLO,ciudad:'Todo el viaje',nota:'Grupo de WhatsApp 24/7 con su agente y el equipo de Concierge Operadora.',foto:''}],hoteles:[],dias:[],servicios:[],tips:[],emergencias:[]};
+    contactos:[{id:'concierge',rol:'Su concierge',nombre:'Concierge Operadora',telefono:'+52 55 0000 0000',whatsapp:WA_EJEMPLO,ciudad:'Todo el viaje',nota:'Grupo de WhatsApp 24/7 con su agente y el equipo de Concierge Operadora.',foto:''}],hoteles:[],dias:[],servicios:[],tips:[],emergencias:[]};
 }
 function syncDays(t){
   const v=t.viaje;if(!okDate(v.inicio)||!okDate(v.fin)||v.fin<v.inicio)return;
@@ -305,7 +305,7 @@ function tabHTML(){
     ${fld('Frase de portada','viaje.resumen',{wide:true,ph:'Buenos Aires, el glaciar Perito Moreno y Ushuaia…'})}
     ${fld('Foto de portada','viaje.foto_portada',{select:FOTOS})}${fld('País del viaje','viaje.pais',{ph:'Argentina',help:'Para el título de emergencias'})}${fld('Nota al pie','viaje.nota',{ph:'Opcional'})}
   </div></div>
-  ${esEjemplo(v.concierge_whatsapp)?'<div class="warnbox"><b>Falta el WhatsApp real del concierge.</b> El número actual es de ejemplo y los botones de WhatsApp no llegarán a nadie.</div>':''}<div class="box"><h3>Concierge</h3><div class="grid">
+  ${esEjemplo(v.concierge_whatsapp)?'<div class="warnbox"><b>WhatsApp genérico.</b> El número del concierge es de ejemplo; cámbialo cuando tengas el definitivo para que los botones de WhatsApp lleguen a alguien.</div>':''}<div class="box"><h3>Concierge</h3><div class="grid">
     ${fld('Nombre','viaje.concierge_nombre',{ph:'Mariel Martagón'})}${fld('WhatsApp (solo números)','viaje.concierge_whatsapp',{ph:'5215512345678',help:'Con lada de país. México: 52 + 10 dígitos'})}${fld('Horario','viaje.concierge_horario',{wide:true})}${fld('Foto del concierge','viaje.foto_concierge',{select:FOTOS})}
   </div></div>`;
   if(tab==='dias'){
@@ -337,7 +337,7 @@ function tabHTML(){
    ${t.emergencias.map((x,i)=>`<div class="list-item"><div class="grid">${fld('Número','emergencias.'+i+'.numero',{ph:'911'})}${fld('Servicio','emergencias.'+i+'.nombre',{ph:'Policía y emergencias'})}</div><span id="dele${i}"><button class="btn danger small" data-dele="${i}">Quitar</button></span></div>`).join('')||'<p class="muted">Aún no hay números.</p>'}
    <div class="actions"><button class="btn ghost" id="adde">+ Número</button></div></div>`;
   if(tab==='publicar'){
-    const miss=[];if(!v.viajeros)miss.push('los viajeros');if(!v.programa)miss.push('el nombre del programa');if(!(v.concierge_whatsapp||'').replace(/\D/g,'')||esEjemplo(v.concierge_whatsapp))miss.push('el WhatsApp real del concierge');if(!t.servicios.length)miss.push('al menos un servicio');
+    const miss=[];if(!v.viajeros)miss.push('los viajeros');if(!v.programa)miss.push('el nombre del programa');if(!(v.concierge_whatsapp||'').replace(/\D/g,''))miss.push('el WhatsApp del concierge');if(!t.servicios.length)miss.push('al menos un servicio');
     const pend=t.servicios.filter(s=>s.estado==='por confirmar').length;
     return `${t.estado==='publicado'&&t.liga?`<div class="okbox"><b>Publicado.</b> Liga para el grupo de WhatsApp:<br><a href="${esc(t.liga)}" target="_blank" rel="noopener">${esc(t.liga)}</a><div class="actions"><button class="btn small" data-copy="${esc(t.liga)}">Copiar liga</button></div></div>`:''}
     ${miss.length?`<div class="warnbox">Falta: ${miss.join(', ')}.</div>`:''}

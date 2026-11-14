@@ -29,8 +29,8 @@ def validar(t):
             err.append(f"Falta viaje.{k}")
     if v.get("ruta") and not RUTA_OK.match(v["ruta"]):
         err.append(f"La ruta '{v['ruta']}' no tiene el formato OPC-AAMM-XXX-abcde")
-    if re.sub(r"\D", "", str(v.get("concierge_whatsapp", ""))).endswith("0000000000"):
-        av.append("El WhatsApp del concierge es el de ejemplo (falta el número real)")
+    if re.sub(r"\D", "", str(v.get("concierge_whatsapp", ""))).endswith("00000000"):
+        av.append("El WhatsApp del concierge es genérico (cámbialo por el definitivo)")
     dias = t.get("dias") or []
     if not dias:
         err.append("El viaje no tiene días")
