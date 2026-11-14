@@ -113,6 +113,7 @@ def construir(t, marca, plantilla, logo):
             .replace("__LOGO__", logo)
             .replace("__LOGO_COLOR__", uri("logo-color.png"))
             .replace("__STAR__", estrella_html())
+            .replace("__FONDO__", foto_uri("fondo-liquido"))
             .replace("__APP_TITLE__", marca["corto"])
             .replace("__TITLE__", f"{marca['nombre']} · {v['programa']}"))
     manifest = {

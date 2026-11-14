@@ -6,12 +6,29 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="__APP_TITLE__">
-<meta name="theme-color" content="#0B0B0B">
+<meta name="theme-color" content="#BFDDF0">
 <meta name="robots" content="noindex,nofollow">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
-<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:0}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:0}body{margin:0}[hidden]{display:none!important}img{max-width:100%}
+/* Liquid glass: tarjetas translúcidas sobre el fondo líquido */
+.clocks,.day-chip,.chip,.night,.list,.person,.card,.tabbar,.timeline,.ev.opt,.tip,select{-webkit-backdrop-filter:var(--glass);backdrop-filter:var(--glass)}
+.night,.list,.person,.card,.timeline,.ev.opt{box-shadow:var(--glass-shadow)}
+.timeline{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:0 16px;margin-top:12px}
+.ev{border-bottom-color:rgba(11,26,44,.08)}
+.list>*{border-color:rgba(11,26,44,.08)!important}
+.clocks{border-bottom:1px solid var(--line)}
+.next{-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);box-shadow:0 10px 30px rgba(8,26,52,.28),inset 0 1px 0 rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.22)}
+.day-chip[aria-pressed="true"]{box-shadow:0 6px 18px rgba(28,147,206,.4)}
+.tabbar{background:rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.8)}
+.hero::after{background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.1) 30%,rgba(0,0,0,.35) 60%,rgba(6,22,44,.75) 100%)}
+.hero.nophoto{background:transparent;color:var(--ink)}
+.hero.nophoto::after{background:none}
+.hero.nophoto .star{color:#fff;opacity:.35}
+.hero:not(.nophoto) h1,.hero:not(.nophoto) .kicker,.hero:not(.nophoto) p{text-shadow:0 2px 16px rgba(0,0,0,.55)}
+.hero:not(.nophoto) h1 em{color:var(--gold-soft)}
+</style>
 </head><body>
 <title>__TITLE__</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -20,14 +37,16 @@
 <style>
 /* Concierge Operadora · app del viajero (plantilla). Layout: una columna tipo app (máx. 720px) con portada fotográfica, selector de días y barra inferior de 5 secciones */
 :root{
-  --bg:#050505; --surface:#111214; --sunk:#17181B; --ink:#F2F4F6; --soft:#9A9EA3; --line:#24262A;
-  --navy:#0B0C0E; --navy-ink:#FFFFFF; --gold:#3FAEE6; --gold-soft:#4DB5EA; --brand:#1C93CE; --ok:#6FC497; --warn:#E3A35E; color-scheme:dark;
+  --bg:#BFDDF0; --surface:rgba(255,255,255,.52); --sunk:rgba(255,255,255,.34); --ink:#0B1A2C; --soft:#3E5068; --line:rgba(255,255,255,.75);
+  --navy:rgba(8,26,52,.62); --navy-ink:#FFFFFF; --gold:#0F6FA6; --gold-soft:#7FD0F5; --brand:#1C93CE; --ok:#1F7A4D; --warn:#9A5A12; color-scheme:light;
+  --glass:blur(22px) saturate(170%); --glass-shadow:0 8px 28px rgba(20,60,110,.16),inset 0 1px 0 rgba(255,255,255,.85);
   --display:"Outfit","Avenir Next","Helvetica Neue",Arial,sans-serif;
   --body:"Outfit","Avenir Next","Helvetica Neue",Arial,sans-serif;
   --r:10px;
 }
 *{box-sizing:border-box}
-html,body{background:var(--bg)}
+html{background:var(--bg)}body{background:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(rgba(255,255,255,.18),rgba(255,255,255,.18)),url("__FONDO__") center/cover no-repeat;pointer-events:none}
 html{font-feature-settings:"lnum" 1}
 body{color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 a{color:inherit}
@@ -173,7 +192,7 @@ select{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--l
 .foot .logo{color:var(--ink);margin:0 auto 10px;height:34px;display:flex;justify-content:center}
 .foot .logo .lc{height:100%;width:auto;display:block}
 .foot .logo .lm{display:none;height:100%}
-.foot .logo .lc{display:none}.foot .logo .lm{display:block}
+.foot .logo .lc{display:block}.foot .logo .lm{display:none}
 
 /* WhatsApp flotante y barra */
 .fab{position:fixed;font-family:var(--body);right:max(16px,calc(env(safe-area-inset-right,0px) + 16px));bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:8px;background:#1F7A4D;color:#fff;text-decoration:none;border-radius:999px;padding:12px 16px 12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.25);font-weight:500;font-size:14.5px}

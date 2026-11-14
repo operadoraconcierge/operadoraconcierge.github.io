@@ -7,10 +7,10 @@ R = P.RAIZ
 tpl = (R / "plantilla/app.html").read_text()
 a = tpl.index('<link rel="preconnect"'); b = tpl.rindex('</body>')
 body = tpl[a:b]
-imgs = {f.stem: P.foto_uri(f.stem) for f in sorted((R / "fotos").glob("*.jpg"))}
+imgs = {f.stem: P.foto_uri(f.stem) for f in sorted((R / "fotos").glob("*.jpg")) if f.stem != "fondo-liquido"}
 body = (body.replace("__TRIP__", "__DATA__").replace("__IMGS__", P.json_html(imgs))
         .replace("__LOGO__", P.logo_html()).replace("__LOGO_COLOR__", P.uri("logo-color.png"))
-        .replace("__STAR__", P.estrella_html()).replace("__APP_TITLE__", "Concierge")
+        .replace("__STAR__", P.estrella_html()).replace("__FONDO__", P.foto_uri("fondo-liquido")).replace("__APP_TITLE__", "Concierge")
         .replace("__TITLE__", "Concierge Operadora"))
 assert body.count("__DATA__") == 1, body.count("__DATA__")
 assert "__" not in re.sub(r"__DATA__", "", body).replace("__proto__", "") or True
