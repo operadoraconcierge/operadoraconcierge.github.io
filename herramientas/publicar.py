@@ -87,6 +87,15 @@ def logo_html():
             f'-webkit-mask:{m};mask:{m}"></span>')
 
 
+def uri(nombre):
+    return "data:image/png;base64," + base64.b64encode((RAIZ / "marca" / nombre).read_bytes()).decode()
+
+
+def estrella_html():
+    m = f"url({uri('estrella-negro.png')}) center/contain no-repeat"
+    return f'<span style="display:block;width:100%;height:100%;background:currentColor;-webkit-mask:{m};mask:{m}"></span>'
+
+
 def json_html(o):
     return json.dumps(o, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
@@ -102,6 +111,8 @@ def construir(t, marca, plantilla, logo):
             .replace("__TRIP__", json_html(t))
             .replace("__IMGS__", json_html(imgs))
             .replace("__LOGO__", logo)
+            .replace("__LOGO_COLOR__", uri("logo-color.png"))
+            .replace("__STAR__", estrella_html())
             .replace("__APP_TITLE__", marca["corto"])
             .replace("__TITLE__", f"{marca['nombre']} · {v['programa']}"))
     manifest = {
