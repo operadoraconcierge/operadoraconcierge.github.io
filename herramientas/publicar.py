@@ -78,6 +78,15 @@ def claves_foto(t):
     return {k for k in out if k}
 
 
+def logo_html():
+    """Logo oficial (PNG con transparencia) usado como máscara: toma el color del texto."""
+    p = RAIZ / "marca" / "logo-negro.png"
+    uri = "data:image/png;base64," + base64.b64encode(p.read_bytes()).decode()
+    m = f"url({uri}) center/contain no-repeat"
+    return (f'<span style="display:block;height:100%;aspect-ratio:2521/734;background:currentColor;'
+            f'-webkit-mask:{m};mask:{m}"></span>')
+
+
 def json_html(o):
     return json.dumps(o, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
@@ -123,7 +132,7 @@ def main():
     solo_revisar = "--revisar" in sys.argv
     marca = json.loads((RAIZ / "marca" / "marca.json").read_text())
     plantilla = (RAIZ / "plantilla" / "app.html").read_text()
-    logo = re.sub(r"<title>.*?</title>", "", (RAIZ / "marca" / "logo.svg").read_text().strip())
+    logo = logo_html()
     hubo_error = False
     for f in sorted((RAIZ / "viajes").glob("*.json")):
         try:

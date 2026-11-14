@@ -1,0 +1,321 @@
+<title>Operadora Concierge</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Operadora Concierge: agencia mayorista de viajes a la medida, Concierge Sports y concierge 24/7 para tus clientes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Outfit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sitio de una sola página en negro cinematográfico. Bandas a todo lo ancho, contenido a 1240px,
+   marcos con esquinas tipo visor de cámara y un solo acento "luz de arranque" para lo accionable. */
+:root{
+  --ink:#0A0A0A;      /* fondo */
+  --panel:#131313;    /* superficies */
+  --line:#2A2A2A;     /* filetes */
+  --fg:#F3F1ED;       /* texto */
+  --mute:#9C978F;     /* texto secundario */
+  --signal:#FF4A2B;   /* acento: luces de arranque de F1 */
+  --display:"Oswald","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --body:"Outfit","Avenir Next","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --wrap:1240px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;font-feature-settings:"lnum" 1}
+body{background:var(--ink);color:var(--fg);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.label b{color:var(--signal);font-weight:500}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-transform:uppercase;line-height:.92;letter-spacing:-.005em;margin:0;text-wrap:balance}
+p{margin:0}
+.logo{display:block;background:currentColor;-webkit-mask:url({{LOGO}}) left center/contain no-repeat;mask:url({{LOGO}}) left center/contain no-repeat;aspect-ratio:2521/734}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:0 0 0 18px;height:48px;border-radius:2px;white-space:nowrap;transition:border-color .2s}
+.btn i{display:grid;place-items:center;width:48px;height:100%;background:var(--signal);color:#000;font-style:normal;font-size:18px}
+.btn:hover{border-color:var(--fg)}
+.btn.ghost{background:transparent}
+.btn.ghost i{background:transparent;color:var(--fg);border-left:1px solid var(--line)}
+
+/* Esquinas de visor */
+.frame{position:relative}
+.frame::before,.frame::after,.frame>.c1,.frame>.c2{content:"";position:absolute;width:14px;height:14px;border:1px solid rgba(243,241,237,.55);pointer-events:none;z-index:2}
+.frame::before{top:10px;left:10px;border-right:0;border-bottom:0}
+.frame::after{top:10px;right:10px;border-left:0;border-bottom:0}
+.frame>.c1{bottom:10px;left:10px;border-right:0;border-top:0}
+.frame>.c2{bottom:10px;right:10px;border-left:0;border-top:0}
+
+/* Navegación */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(10,10,10,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--ink)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.nav .logo{height:34px;color:var(--fg)}
+.nav nav{display:flex;gap:26px;margin-left:auto}
+.nav nav a{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--mute)}
+.nav nav a:hover{color:var(--fg)}
+.nav .btn{height:40px}
+.nav .btn i{width:40px}
+
+/* Portada */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero .bg{position:absolute;inset:0;background:url({{F1}}) center 60%/cover no-repeat;opacity:.55;filter:saturate(1.1)}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,.35) 45%,rgba(10,10,10,.95) 100%)}
+.hero .wrap{position:relative;padding-block:72px 56px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
+.hero h1{font-size:clamp(64px,13vw,184px)}
+.hero h1 span{display:block}
+.hero h1 .o{color:transparent;-webkit-text-stroke:1.5px var(--fg)}
+.hero .side{max-width:330px;display:grid;gap:18px;padding-bottom:14px}
+.hero .side p{color:#D9D5CF}
+.hero .meta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px 28px;border-top:1px solid var(--line);padding-top:18px;margin-top:20px}
+.hero .meta span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.hero .meta span::before{content:"[ ";color:var(--signal)}
+.hero .meta span::after{content:" ]";color:var(--signal)}
+
+/* Secciones */
+section{border-bottom:1px solid var(--line)}
+.sec{padding-block:88px}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:24px 48px;align-items:end;margin-bottom:44px}
+.sec-head h2{font-size:clamp(44px,7vw,96px)}
+.sec-head p{color:var(--mute)}
+
+/* Cifras */
+.stats{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:34px 24px 30px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat b{display:block;font-family:var(--display);font-weight:600;font-size:clamp(48px,6vw,80px);line-height:1}
+.stat b em{font-style:normal;color:var(--signal)}
+.stat span{display:block;margin-top:10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+
+/* Experiencias */
+.feature{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);border:1px solid var(--line);background:var(--panel)}
+.feature .media{min-height:420px;background:url({{SPHERE}}) center/cover no-repeat}
+.feature .txt{padding:34px;display:flex;flex-direction:column;gap:18px;justify-content:space-between}
+.feature h3{font-size:clamp(40px,4.6vw,64px)}
+.feature .tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);padding:5px 9px;color:var(--fg)}
+.tag.on{border-color:var(--signal);color:var(--signal)}
+.feature dl{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0;font-size:15px}
+.feature dt{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);padding-top:2px}
+.feature dd{margin:0}
+
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.card{position:relative;border:1px solid var(--line);background:var(--panel);min-height:300px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;overflow:hidden;text-decoration:none;transition:border-color .2s}
+.card:hover{border-color:#555}
+.card .k{display:flex;justify-content:space-between;gap:10px}
+.card h3{font-size:clamp(32px,3.2vw,44px);position:relative}
+.card p{color:var(--mute);font-size:15px;position:relative}
+.card .glyph{position:absolute;right:-10px;bottom:-34px;font-family:var(--display);font-weight:600;font-size:200px;line-height:1;color:rgba(243,241,237,.045);pointer-events:none}
+
+/* Concierge Sports */
+.sports{background:#0E0E0E}
+.sports .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.sports h2{font-size:clamp(48px,8vw,120px)}
+.sports h2 em{font-style:normal;color:var(--signal)}
+.sports ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.sports li{padding:16px 0;border-bottom:1px solid var(--line);font-family:var(--display);font-size:24px;text-transform:uppercase;letter-spacing:.01em;display:flex;gap:12px;align-items:baseline}
+.sports li span{font-family:var(--mono);font-size:11px;color:var(--mute)}
+
+/* App */
+.app .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.reel{position:relative;padding:34px 0;background:#000;border:1px solid var(--line);display:flex;justify-content:center}
+.reel::before,.reel::after{content:"";position:absolute;left:0;right:0;height:22px;background:repeating-linear-gradient(90deg,transparent 0 14px,#1d1d1d 14px 30px);}
+.reel::before{top:6px}.reel::after{bottom:6px}
+.phone{width:min(300px,78%);aspect-ratio:390/700;border:9px solid #1a1a1a;border-radius:38px;overflow:hidden;background:#000 url({{APP}}) top center/cover no-repeat;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.steps{display:grid;gap:0;margin-top:30px;border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:56px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.step b{font-family:var(--mono);font-weight:500;font-size:13px;color:var(--signal)}
+.step h3{font-size:24px;line-height:1.1;margin-bottom:4px}
+.step p{color:var(--mute);font-size:15px}
+
+/* Agencias */
+.agencias .cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.agencias .col{padding:26px 22px 8px 0}
+.agencias .col+.col{padding-left:22px;border-left:1px solid var(--line)}
+.agencias .col b{font-family:var(--mono);font-size:12px;color:var(--signal);letter-spacing:.08em}
+.agencias .col h3{font-size:30px;margin:12px 0 8px}
+.agencias .col p{color:var(--mute);font-size:15px}
+
+/* Contacto */
+.contact{position:relative;overflow:hidden}
+.contact .star{position:absolute;right:-120px;top:50%;width:620px;aspect-ratio:1;transform:translateY(-50%);background:rgba(243,241,237,.05);-webkit-mask:url({{STAR}}) center/contain no-repeat;mask:url({{STAR}}) center/contain no-repeat;pointer-events:none}
+.contact .wrap{position:relative;padding-block:100px}
+.contact h2{font-size:clamp(56px,10vw,150px)}
+.contact .rows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:48px;border-top:1px solid var(--line)}
+.contact .row{padding:20px 20px 20px 0;display:grid;gap:6px;min-width:0}
+.contact .row+.row{padding-left:20px;border-left:1px solid var(--line)}
+.contact .row a,.contact .row span{font-size:19px;text-decoration:none;word-break:break-word}
+.contact .row a:hover{color:var(--signal)}
+.contact .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+
+footer{padding-block:34px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between}
+footer .logo{height:30px;color:var(--fg)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--mute);letter-spacing:.04em}
+
+@media (max-width:980px){
+  .nav nav{display:none}
+  .hero .wrap{grid-template-columns:1fr}
+  .sec-head,.feature,.sports .wrap,.app .wrap{grid-template-columns:1fr}
+  .feature .media{min-height:260px}
+  .grid{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .agencias .cols{grid-template-columns:1fr 1fr}
+  .agencias .col:nth-child(3){padding-left:0;border-left:0}
+  .contact .rows{grid-template-columns:1fr}
+  .contact .row+.row{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+}
+@media (max-width:620px){
+  .nav .btn span{display:none}
+  .nav .btn{padding-left:0}
+  .grid{grid-template-columns:1fr}
+  .sec{padding-block:64px}
+  .agencias .cols{grid-template-columns:1fr}
+  .agencias .col,.agencias .col+.col{padding-left:0;border-left:0;border-bottom:1px solid var(--line);padding-bottom:22px}
+  .sports ul{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#inicio" aria-label="Operadora Concierge, inicio"><span class="logo"></span></a>
+    <nav aria-label="Secciones">
+      <a href="#experiencias">Experiencias</a>
+      <a href="#sports">Concierge Sports</a>
+      <a href="#app">Concierge 24/7</a>
+      <a href="#agencias">Agencias</a>
+    </nav>
+    <a class="btn" href="#contacto"><span>Cotizar</span><i aria-hidden="true">↗</i></a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero frame"><span class="c1"></span><span class="c2"></span>
+    <div class="bg" role="img" aria-label="Fórmula 1 de noche en el Strip de Las Vegas"></div>
+    <div class="wrap">
+      <h1><span>Viajes</span><span class="o">a la</span><span>medida.</span></h1>
+      <div class="side">
+        <p class="label">Agencia mayorista <b>·</b> Est. 2021</p>
+        <p>Diseñamos el viaje, conseguimos lo imposible y acompañamos a tus clientes las 24 horas, antes, durante y después.</p>
+        <div><a class="btn" href="#experiencias">Ver experiencias<i aria-hidden="true">↓</i></a></div>
+      </div>
+      <div class="meta"><span>Deportes</span><span>Conciertos</span><span>Destinos</span><span>Lujo</span><span>Concierge 24/7</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b>5<em>+</em></b><span>años de trayectoria</span></div>
+        <div class="stat"><b>24<em>/</em>7</b><span>concierge en cada viaje</span></div>
+        <div class="stat"><b>1</b><span>liga con todo el viaje</span></div>
+        <div class="stat"><b>100<em>%</em></b><span>a la medida</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="experiencias">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="label"><b>[ 01 ]</b> Experiencias</p><h2 style="margin-top:14px">Lo que tus clientes van a querer vivir</h2></div>
+        <p>Paquetes completos con boletos, hotel, traslados y concierge. Los ajustamos a fechas, presupuesto y estilo de cada viajero.</p>
+      </div>
+
+      <article class="feature">
+        <div class="media frame" role="img" aria-label="Sphere iluminado en Las Vegas"><span class="c1"></span><span class="c2"></span></div>
+        <div class="txt">
+          <div class="tags"><span class="tag on">Destacado</span><span class="tag">Concierge Sports</span></div>
+          <h3>Las Vegas 2026</h3>
+          <dl>
+            <dt>Incluye</dt><dd>Fórmula 1 + Sphere + Backstreet Boys</dd>
+            <dt>Fechas</dt><dd>18 al 21 de noviembre de 2026</dd>
+            <dt>Ideal para</dt><dd>Parejas y grupos que quieren el fin de semana más grande del año</dd>
+          </dl>
+          <div><a class="btn" href="#contacto">Cotizar este viaje<i aria-hidden="true">↗</i></a></div>
+        </div>
+      </article>
+
+      <div class="grid">
+        <a class="card" href="#contacto"><div class="k"><span class="label">NFL · CDMX</span><span class="label"><b>22 nov 2026</b></span></div><div><h3>49ers vs Vikings</h3><p>La NFL llega a la Ciudad de México. Boletos, hospitalidad y traslados.</p></div><span class="glyph" aria-hidden="true">NFL</span></a>
+        <a class="card" href="#contacto"><div class="k"><span class="label">Música · Las Vegas</span><span class="label"><b>Nov–dic 2026</b></span></div><div><h3>The Eagles en Sphere</h3><p>Una de las residencias más pedidas, con hotel en el Strip.</p></div><span class="glyph" aria-hidden="true">LV</span></a>
+        <a class="card" href="#contacto"><div class="k"><span class="label">Fútbol · España</span><span class="label"><b>Temporada</b></span></div><div><h3>Vive el Clásico</h3><p>Barcelona contra Real Madrid desde los mejores asientos.</p></div><span class="glyph" aria-hidden="true">FCB</span></a>
+        <a class="card" href="#contacto"><div class="k"><span class="label">Texas · EE. UU.</span><span class="label"><b>Todo el año</b></span></div><div><h3>Austin</h3><p>Fórmula 1 en el Circuit of the Americas, ACL Festival y fútbol americano universitario.</p></div><span class="glyph" aria-hidden="true">ATX</span></a>
+        <a class="card" href="#contacto"><div class="k"><span class="label">Nieve · Canadá</span><span class="label"><b>Invierno</b></span></div><div><h3>Esquí en Canadá</h3><p>Whistler, Banff y los mejores lugares para esquiar, con hoteles ski-in.</p></div><span class="glyph" aria-hidden="true">CAN</span></a>
+        <a class="card" href="#contacto"><div class="k"><span class="label">México · Cozumel</span><span class="label"><b>Escapada</b></span></div><div><h3>Zel Cozumel</h3><p>Una nueva forma de vivir el lujo en el Caribe mexicano.</p></div><span class="glyph" aria-hidden="true">CZM</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sports" id="sports">
+    <div class="wrap">
+      <div>
+        <p class="label"><b>[ 02 ]</b> Concierge Sports</p>
+        <h2 style="margin-top:14px">Acceso a la <em>primera</em> fila.</h2>
+        <p style="color:var(--mute);margin-top:22px;max-width:460px">Nuestra línea deportiva. Boletos oficiales, hospitalidad y viajes completos para los eventos que todos quieren ver en vivo.</p>
+        <div style="margin-top:28px"><a class="btn ghost" href="#contacto">Pedir disponibilidad<i aria-hidden="true">↗</i></a></div>
+      </div>
+      <ul>
+        <li><span>01</span>Fórmula 1</li><li><span>02</span>NFL</li>
+        <li><span>03</span>NBA</li><li><span>04</span>Fútbol</li>
+        <li><span>05</span>MLB</li><li><span>06</span>Tenis y golf</li>
+        <li><span>07</span>Box</li><li><span>08</span>Conciertos</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec app" id="app">
+    <div class="wrap">
+      <div>
+        <p class="label"><b>[ 03 ]</b> Concierge 24/7</p>
+        <h2 style="margin-top:14px;font-size:clamp(44px,6.4vw,88px)">El viaje entero, en el bolsillo.</h2>
+        <p style="color:var(--mute);margin-top:20px;max-width:480px">Cada viajero recibe una liga personal con su itinerario día por día. Se instala en el iPhone como una app y su concierge está a un mensaje de distancia.</p>
+        <div class="steps">
+          <div class="step"><b>01</b><div><h3>Itinerario vivo</h3><p>Hora local y hora de CDMX, vuelos, traslados, reservas y códigos de confirmación.</p></div></div>
+          <div class="step"><b>02</b><div><h3>Su equipo, a un toque</h3><p>Chofer, guía y concierge con WhatsApp directo. El grupo con la agencia sigue siendo el canal humano.</p></div></div>
+          <div class="step"><b>03</b><div><h3>Opcionales al momento</h3><p>Experiencias extra que el viajero pide con un botón: “Solicitar a mi concierge”.</p></div></div>
+        </div>
+      </div>
+      <div class="reel"><div class="phone" role="img" aria-label="App del viajero mostrando el viaje Las Vegas Grand Prix"></div></div>
+    </div>
+  </section>
+
+  <section class="sec agencias" id="agencias">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="label"><b>[ 04 ]</b> Para agencias</p><h2 style="margin-top:14px">Tú vendes. Nosotros nos encargamos.</h2></div>
+        <p>Trabajamos de la mano con agentes de viajes. Tu cliente sigue siendo tuyo y recibe un servicio de nivel lujo de principio a fin.</p>
+      </div>
+      <div class="cols">
+        <div class="col"><b>01 · Cotiza</b><h3>Cuéntanos el viaje</h3><p>Fechas, evento o destino y el estilo de tu cliente. Respondemos con una propuesta a la medida.</p></div>
+        <div class="col"><b>02 · Reserva</b><h3>Lo armamos todo</h3><p>Boletos, hoteles, vuelos, traslados y restaurantes, confirmados por nuestro equipo.</p></div>
+        <div class="col"><b>03 · Acompaña</b><h3>Grupo de WhatsApp</h3><p>Días antes de salir creamos el grupo con tu cliente, tú y su concierge, y enviamos su app.</p></div>
+        <div class="col"><b>04 · Disfruta</b><h3>Concierge 24/7</h3><p>Cambios, antojos o imprevistos durante el viaje. Nosotros lo resolvemos.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="star" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="label"><b>[ 05 ]</b> Contacto</p>
+      <h2 style="margin-top:14px">Hablemos de tu próximo viaje.</h2>
+      <div class="rows">
+        <div class="row"><span class="label">WhatsApp Business</span><a href="https://wa.me/525538902377" target="_blank" rel="noopener">55 3890 2377</a></div>
+        <div class="row"><span class="label">Ventas</span><a href="mailto:ventas@operadoraconcierge.com.mx">ventas@operadoraconcierge.com.mx</a></div>
+        <div class="row"><span class="label">Instagram</span><a href="https://www.instagram.com/operadoraconcierge/" target="_blank" rel="noopener">@operadoraconcierge</a></div>
+      </div>
+      <div class="cta"><a class="btn" href="https://wa.me/525538902377" target="_blank" rel="noopener">Escribir por WhatsApp<i aria-hidden="true">↗</i></a><a class="btn ghost" href="https://www.conciergesports.mx/" target="_blank" rel="noopener">Boletos en Concierge Sports<i aria-hidden="true">↗</i></a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="logo" role="img" aria-label="Operadora Concierge"></span>
+    <p>© 2026 Operadora Concierge · Travel &amp; Life · operadoraconcierge.com</p>
+  </div>
+</footer>
