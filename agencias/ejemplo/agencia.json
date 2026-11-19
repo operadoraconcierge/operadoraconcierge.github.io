@@ -1,0 +1,22 @@
+{
+ "_ayuda": "Copia esta carpeta, cambia los datos y corre: python3 herramientas/nueva_agencia.py agencias/<carpeta>/agencia.json",
+ "nombre": "Viajes Altamira",
+ "corto": "Altamira",
+ "dominio": "viajesaltamira.com",
+ "web": "https://www.viajesaltamira.com",
+ "prefijo_codigo": "ALT",
+ "github_usuario": "viajesaltamira",
+ "concierge_nombre": "Concierge Altamira",
+ "concierge_whatsapp": "5215500000000",
+ "concierge_telefono": "+52 55 0000 0000",
+ "concierge_horario": "24/7 durante su viaje, en horario de México",
+ "colores": {
+  "fondo": "#16130F",
+  "barra": "#0E0C0A",
+  "acento": "#E2B864",
+  "acento_suave": "#EED39A",
+  "marca": "#B8862F"
+ },
+ "tipografia": "Outfit",
+ "logo": ""
+}

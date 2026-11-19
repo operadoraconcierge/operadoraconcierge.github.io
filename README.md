@@ -12,7 +12,8 @@ No comparte nada con la app de Nunatak: repositorio, cuenta de GitHub y panel pr
 | `viajes/*.json` | Un archivo por viaje. |
 | `OPC-AAMM-XXX-abcde/` | Viaje publicado: esa carpeta es la liga del viajero. |
 | `panel/panel-artifact.html` | Código del panel de carga (vive como Artifact de Claude, con su propia base de datos). |
-| `herramientas/publicar.py` | Valida y publica los viajes en estado `listo`. |
+| `herramientas/publicar.py` | Valida y publica los viajes en estado `listo`. Lee colores y letra opcionales de `marca.json`. |
+| `agencias/`, `herramientas/nueva_agencia.py` | Versión para agencias: genera la instalación de otra agencia con su marca (ver `agencias/README.md`). |
 
 ## Flujo
 1. Mariel carga el viaje en el panel (iPad) y toca **Listo para publicar**.
