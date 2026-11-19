@@ -10,7 +10,7 @@ versión publicada (o no existe todavía).
 Uso:  python3 herramientas/publicar.py            # publica
       python3 herramientas/publicar.py --revisar  # solo valida, no escribe
 """
-import base64, hashlib, json, mimetypes, re, shutil, sys
+import base64, hashlib, json, mimetypes, re, shutil, struct, sys
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -78,13 +78,49 @@ def claves_foto(t):
     return {k for k in out if k}
 
 
+def medidas_png(p):
+    """(ancho, alto) de un PNG leyendo su encabezado."""
+    with open(p, "rb") as f:
+        cab = f.read(24)
+    return struct.unpack(">II", cab[16:24])
+
+
 def logo_html():
     """Logo oficial (PNG con transparencia) usado como máscara: toma el color del texto."""
     p = RAIZ / "marca" / "logo-negro.png"
+    w, h = medidas_png(p)
     uri = "data:image/png;base64," + base64.b64encode(p.read_bytes()).decode()
     m = f"url({uri}) center/contain no-repeat"
-    return (f'<span style="display:block;height:100%;aspect-ratio:2521/734;background:currentColor;'
+    return (f'<span style="display:block;height:100%;aspect-ratio:{w}/{h};background:currentColor;'
             f'-webkit-mask:{m};mask:{m}"></span>')
+
+
+# Colores de la plantilla (los de Operadora Concierge). Si marca.json trae "colores",
+# se sustituyen por los de la agencia; si no, la app sale idéntica.
+COLORES_BASE = {"fondo": "#141518", "acento": "#4DB5EA", "acento_suave": "#6CC4F0", "marca": "#1C93CE"}
+
+
+def hex_rgb(h):
+    h = h.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def aplicar_marca(html, marca):
+    col = marca.get("colores") or {}
+    for clave, base in COLORES_BASE.items():
+        nuevo = col.get(clave)
+        if not nuevo or nuevo.upper() == base.upper():
+            continue
+        html = html.replace(base, nuevo).replace(base.lower(), nuevo)
+        if clave == "marca":
+            r, g, b = hex_rgb(base)
+            r2, g2, b2 = hex_rgb(nuevo)
+            html = html.replace(f"rgba({r},{g},{b},", f"rgba({r2},{g2},{b2},")
+    letra = marca.get("tipografia")
+    if letra and letra != "Outfit":
+        html = (html.replace("family=Outfit:", "family=" + letra.replace(" ", "+") + ":")
+                .replace('"Outfit"', f'"{letra}"'))
+    return html
 
 
 def uri(nombre):
@@ -113,21 +149,24 @@ def construir(t, marca, plantilla, logo):
             .replace("__LOGO__", logo)
             .replace("__LOGO_COLOR__", uri("logo-color.png"))
             .replace("__STAR__", estrella_html())
-            .replace("__FONDO__", foto_uri("fondo-liquido"))
+            .replace("__FONDO__", foto_uri("fondo-liquido") or "")
             .replace("__APP_TITLE__", marca["corto"])
             .replace("__TITLE__", f"{marca['nombre']} · {v['programa']}"))
+    html = aplicar_marca(html, marca)
     manifest = {
         "name": f"{marca['corto']} · {v['programa']}",
         "short_name": marca["corto"],
         "start_url": "./", "scope": "./", "display": "standalone",
-        "background_color": "#0B0B0B", "theme_color": "#0B0B0B", "lang": "es",
+        "background_color": (marca.get("colores") or {}).get("barra", "#0B0B0B"),
+        "theme_color": (marca.get("colores") or {}).get("barra", "#0B0B0B"), "lang": "es",
         "icons": [
             {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
             {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"},
         ],
     }
     version = hashlib.sha1(html.encode()).hexdigest()[:10]
-    sw = (RAIZ / "plantilla" / "sw.js").read_text().replace("__CACHE__", f"opc-{v['codigo']}-{version}")
+    pref = marca.get("prefijo_codigo", "OPC").lower()
+    sw = (RAIZ / "plantilla" / "sw.js").read_text().replace("__CACHE__", f"{pref}-{v['codigo']}-{version}")
     return {"index.html": html, "manifest.webmanifest": json.dumps(manifest, ensure_ascii=False, indent=1), "sw.js": sw}
 
 
